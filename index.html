@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>ゴンチャポータル</title>
+  <style>
+    :root{
+      --tile-gap: 10px;
+      --tile-radius: 18px;
+      --bg: #ffffff;
+      --text: #111111;
+    }
+    body{
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      user-select: none;
+    }
+    .wrap{
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 14px;
+    }
+    .grid{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 横3列 */
+      gap: var(--tile-gap);
+      align-items: stretch;
+    }
+    .tile{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: var(--tile-radius);
+      text-decoration: none;
+      background: #f3f3f3;
+      overflow: hidden;
+      min-height: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .imgBox{
+      width: 68%;
+      aspect-ratio: 1 / 1;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 12px;
+      background: #eaeaea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .imgBox img{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .label{
+      width: 100%;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 10px 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-sizing: border-box;
+      line-height: 1.2;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <script>
+    const siteData = [
+      { "name": "TASTY QUBE", "url": "https://www.tq7.tasty-web.com/TastyQubeGNC/MainAction.do?companyCd=GNC", "imageKey": "tasty-qube.png" },
+      { "name": "シェアフルシフト", "url": "https://cadm.sync-up.jp/#/auth/login", "imageKey": "shareful-shift.png" },
+      { "name": "HANZO予測", "url": "https://hanzo.cloud/predict/dashboard", "imageKey": "hanzo-yosoku.png" },
+      { "name": "キロクル", "url": "https://kirokuru.jp/home/status/", "imageKey": "kirokuru.png" },
+      { "name": "リクオプ求人", "url": "https://gongcha-job.net/recruiter-sectiontohire/loginForm", "imageKey": "rikoup-job.png" },
+      { "name": "ABILI", "url": "https://clipline.jp/training/#/", "imageKey": "abili.png" },
+      { "name": "天気予報", "url": "https://weathernews.jp/", "imageKey": "tenki-yoho.png" },
+      { "name": "スマートHR", "url": "https://gongcha.smarthr.jp/login", "imageKey": "smart-hr.png" },
+      { "name": "Touch on Time", "url": "https://touchontime.com/admin", "imageKey": "touch-on-time.png" },
+      { "name": "UZマネージャー", "url": "https://gongcha-manage-store.uz-apps.com/", "imageKey": "uz-manager.png" },
+      { "name": "HRブレイン", "url": "https://gongcha.auth.hrbrain.jp/login", "imageKey": "hrbrain.png" }
+    ];
+
+    const grid = document.getElementById('grid');
+
+    siteData.forEach(s => {
+      const a = document.createElement('a');
+      a.className = 'tile';
+      a.href = s.url;
+      a.setAttribute('target', '_blank'); // Safariで新規タブ動作
+      a.rel = 'noopener noreferrer';
+
+      a.innerHTML = `
+        <div class="imgBox">
+          <img src="./images/${s.imageKey}" alt="${s.name}">
+        </div>
+        <div class="label">${s.name}</div>
+      `;
+
+      grid.appendChild(a);
+    });
+  </script>
+</body>
+</html>
